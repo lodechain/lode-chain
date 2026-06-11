@@ -1,0 +1,15 @@
+#!/usr/bin/expect -f
+spawn ./build/Linux/_no_branch_/release/bin/lode-wallet-cli --testnet --wallet-file wallet_alice --password "1234" --daemon-address 127.0.0.1:28081
+expect "Do you want to do it now? (Y/Yes/N/No):"
+send "n\r"
+expect "Enter password (output received):"
+send "1234\r"
+expect "\[wallet M6AfKr\]:"
+send "transfer MATxGYGWRtUDPwfojFpx6aSnXX3nLARAYTW9Dy4PzgxfVCAFMuNLR2viaNZkCauTCfdsoNMbaiE72AWuYuc2siozRhgZ3Jf 50\r"
+expect "Wallet password:"
+send "1234\r"
+expect "Is this okay?"
+send "y\r"
+expect "\[wallet M6AfKr\]:"
+send "exit\r"
+expect eof

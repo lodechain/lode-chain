@@ -1,0 +1,6 @@
+ROUND | A (height / hash) | B (height / hash) | C (height / hash) | STATUS
+-------------------------------------------------------------------------------
+  1   | 4 / fb93938f | 4 / fb93938f | 4 / fb93938f | PASS
+  2   | 5 / 825fa395 | 5 / 825fa395 | 5 / 825fa395 | PASS
+  3   | 4 / 0e5ce9dc | 4 / 0e5ce9dc | 4 / 0e5ce9dc | PASS
+  4   | 5 / 2a16d34c | 5 / 2a16d34c | 5 / 2a16d34c | PASS
