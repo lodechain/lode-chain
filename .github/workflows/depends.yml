@@ -45,7 +45,7 @@ jobs:
             packages: "clang-8 gperf cmake python3-zmq libdbus-1-dev libharfbuzz-dev"
     name: ${{ matrix.toolchain.name }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
         fetch-depth: 0
         submodules: recursive
