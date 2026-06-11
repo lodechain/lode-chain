@@ -25,15 +25,16 @@ jobs:
   build-ubuntu:
     runs-on: ${{ matrix.os }}
     env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       CCACHE_TEMPDIR: /tmp/.ccache-temp
     strategy:
       matrix:
         os: [ubuntu-22.04, ubuntu-20.04]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: recursive
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       with:
         path: ~/.ccache
         key: ccache-${{ runner.os }}-build-${{ matrix.os }}-${{ github.sha }}
@@ -61,12 +62,13 @@ jobs:
   libwallet-ubuntu:
     runs-on: ubuntu-20.04
     env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       CCACHE_TEMPDIR: /tmp/.ccache-temp
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: recursive
-    - uses: actions/cache@v3
+    - uses: actions/cache@v4
       with:
         path: ~/.ccache
         key: ccache-${{ runner.os }}-libwallet-${{ github.sha }}
@@ -89,13 +91,14 @@ jobs:
     needs: build-ubuntu
     runs-on: ubuntu-20.04
     env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       CCACHE_TEMPDIR: /tmp/.ccache-temp
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         submodules: recursive
     - name: ccache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.ccache
         key: ccache-${{ runner.os }}-build-ubuntu-latest-${{ github.sha }}
@@ -124,8 +127,10 @@ jobs:
 
   source-archive:
     runs-on: ubuntu-20.04
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
         submodules: recursive
