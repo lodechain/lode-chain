@@ -14,14 +14,10 @@ jobs:
         operating-system:
           - name: "Linux"
             option: "l"
-          - name: "Windows"
-            option: "w"
           - name: "Android"
             option: "a"
           - name: "FreeBSD"
             option: "f"
-          - name: "macOS"
-            option: "m"
     name: ${{ matrix.operating-system.name }}
     steps:
     - name: prepare
