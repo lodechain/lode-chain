@@ -42,7 +42,7 @@ jobs:
         ${{env.CCACHE_SETTINGS}}
         make -j3
     - name: Upload macOS Binaries
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: LODE-macOS-x64
         path: build/*/release/bin/*
@@ -73,7 +73,7 @@ jobs:
         ${{env.CCACHE_SETTINGS}}
         make release-static-win64 -j2
     - name: Upload Windows Binaries
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: LODE-Windows-x64
         path: |
@@ -112,7 +112,7 @@ jobs:
         ${{env.CCACHE_SETTINGS}}
         ${{env.BUILD_DEFAULT_LINUX}}
     - name: Upload Linux Binaries
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: LODE-Linux-${{ matrix.os }}-x64
         path: |
@@ -197,7 +197,7 @@ jobs:
         export OUTPUT="$VERSION.tar"
         echo "OUTPUT=$OUTPUT" >> $GITHUB_ENV
         /home/runner/.local/bin/git-archive-all --prefix "$VERSION/" --force-submodules "$OUTPUT"
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: ${{ env.OUTPUT }}
         path: /home/runner/work/monero/monero/${{ env.OUTPUT }}
