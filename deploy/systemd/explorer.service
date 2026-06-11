@@ -1,0 +1,17 @@
+[Unit]
+Description=LODE Blockchain Explorer
+After=network.target loded-testnet.service
+
+[Service]
+User=lode
+Group=lode
+Type=simple
+WorkingDirectory=/usr/local/bin/explorer
+# The explorer binary reads templates from its working directory, so it must be run from where it is installed.
+# We point to the local loded testnet RPC and explicitly define the blockchain path.
+ExecStart=/usr/local/bin/explorer/xmrblocks --daemon-url 127.0.0.1:38081 --port 8081 --testnet --bc-path /var/lib/lode/testnet/lmdb
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

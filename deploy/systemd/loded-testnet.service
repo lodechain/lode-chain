@@ -1,0 +1,15 @@
+[Unit]
+Description=LODE Testnet Node
+After=network.target
+
+[Service]
+User=lode
+Group=lode
+Type=simple
+# Security and networking parameters applied for public testnet node
+ExecStart=/usr/local/bin/loded --testnet --data-dir /var/lib/lode --log-file /var/log/lode/loded.log --rpc-bind-ip 0.0.0.0 --confirm-external-bind --restricted-rpc --rpc-bind-port 38081 --non-interactive
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

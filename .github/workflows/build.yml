@@ -41,6 +41,11 @@ jobs:
       run: |
         ${{env.CCACHE_SETTINGS}}
         make -j3
+    - name: Upload macOS Binaries
+      uses: actions/upload-artifact@v3
+      with:
+        name: LODE-macOS-x64
+        path: build/*/release/bin/*
 
   build-windows:
     runs-on: windows-latest
@@ -67,6 +72,13 @@ jobs:
       run: |
         ${{env.CCACHE_SETTINGS}}
         make release-static-win64 -j2
+    - name: Upload Windows Binaries
+      uses: actions/upload-artifact@v3
+      with:
+        name: LODE-Windows-x64
+        path: |
+          build/x86_64-w64-mingw32/release/bin/*.exe
+          release_scripts/
 
 # See the OS labels and monitor deprecations here:
 # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners#supported-runners-and-hardware-resources
@@ -99,6 +111,13 @@ jobs:
       run: |
         ${{env.CCACHE_SETTINGS}}
         ${{env.BUILD_DEFAULT_LINUX}}
+    - name: Upload Linux Binaries
+      uses: actions/upload-artifact@v3
+      with:
+        name: LODE-Linux-${{ matrix.os }}-x64
+        path: |
+          build/bin/*
+          release_scripts/
 
   libwallet-ubuntu:
     runs-on: ubuntu-20.04

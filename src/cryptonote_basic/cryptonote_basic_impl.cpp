@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2022, The Monero Project
+// Copyright (c) 2014-2022, The LODE Project
 //
 // All rights reserved.
 //
@@ -80,16 +80,27 @@ namespace cryptonote {
     return CRYPTONOTE_MAX_TX_SIZE;
   }
   //-----------------------------------------------------------------------------------------------
-  bool get_block_reward(size_t median_weight, size_t current_block_weight, uint64_t already_generated_coins, uint64_t &reward, uint8_t version) {
-    static_assert(DIFFICULTY_TARGET_V2%60==0&&DIFFICULTY_TARGET_V1%60==0,"difficulty targets must be a multiple of 60");
-    const int target = version < 2 ? DIFFICULTY_TARGET_V1 : DIFFICULTY_TARGET_V2;
-    const int target_minutes = target / 60;
-    const int emission_speed_factor = EMISSION_SPEED_FACTOR_PER_MINUTE - (target_minutes-1);
+  bool get_block_reward(size_t median_weight, size_t current_block_weight, uint64_t already_generated_coins, uint64_t &reward, uint8_t version, uint64_t height) {
+    uint64_t base_reward = 0;
 
-    uint64_t base_reward = (MONEY_SUPPLY - already_generated_coins) >> emission_speed_factor;
-    if (base_reward < FINAL_SUBSIDY_PER_MINUTE*target_minutes)
-    {
-      base_reward = FINAL_SUBSIDY_PER_MINUTE*target_minutes;
+    if (height == 0) {
+      base_reward = 0;
+    } else if (already_generated_coins >= MONEY_SUPPLY) {
+      base_reward = 0;
+    } else {
+      const uint64_t HALVING_INTERVAL = 500000;
+      const uint64_t INITIAL_REWARD = 10000000000ull; // 100 * 10^8
+      uint64_t halvings = height / HALVING_INTERVAL;
+
+      if (halvings >= 63) {
+        base_reward = 0;
+      } else {
+        base_reward = INITIAL_REWARD >> halvings;
+      }
+
+      if (already_generated_coins + base_reward > MONEY_SUPPLY) {
+        base_reward = MONEY_SUPPLY - already_generated_coins;
+      }
     }
 
     uint64_t full_reward_zone = get_min_block_weight(version);

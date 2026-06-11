@@ -1,0 +1,17 @@
+[Unit]
+Description=LODE Testnet Faucet Node.js App
+After=network.target lode-wallet-rpc.service
+
+[Service]
+User=lode
+Group=lode
+Type=simple
+WorkingDirectory=/opt/lode-faucet
+# Requires node.js to be installed on the system
+ExecStart=/usr/bin/node app.js
+Restart=always
+RestartSec=10
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

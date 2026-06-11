@@ -1,0 +1,16 @@
+[Unit]
+Description=LODE Faucet Wallet RPC
+After=network.target loded-testnet.service
+
+[Service]
+User=lode
+Group=lode
+Type=simple
+# Requires a pre-generated wallet file at /var/lib/lode/faucet_wallet
+# You must generate this wallet and mine/fund it beforehand.
+ExecStart=/usr/local/bin/lode-wallet-rpc --testnet --wallet-file /var/lib/lode/faucet_wallet --password "faucet_wallet_pass" --daemon-address 127.0.0.1:38081 --rpc-bind-port 38083 --rpc-login faucet:faucet_password --disable-rpc-login=false
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

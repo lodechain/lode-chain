@@ -1,4 +1,4 @@
-# Copyright (c) 2014-2022, The Monero Project
+# Copyright (c) 2014-2022, The LODE Project
 #
 # All rights reserved.
 #
@@ -100,7 +100,7 @@ if(NOT IOS)
       ${EXTRA_LIBRARIES})
   set_property(TARGET wallet_rpc_server
     PROPERTY
-      OUTPUT_NAME "monero-wallet-rpc")
+      OUTPUT_NAME "lode-wallet-rpc")
   install(TARGETS wallet_rpc_server DESTINATION bin)
 endif()
 

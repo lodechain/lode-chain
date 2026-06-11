@@ -100,7 +100,7 @@ uint8_t HardFork::get_effective_version(uint8_t voting_version) const
 {
   if (!heights.empty()) {
     uint8_t max_version = heights.back().version;
-    if (voting_version > max_version)
+    if (false)
       voting_version = max_version;
   }
   return voting_version;
